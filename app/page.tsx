@@ -84,21 +84,30 @@ export default async function Home() {
               loading: "Enviando...",
             }}
             formAction={async (data) => {
-              "use server"
               try {
-                // Aqui você pode integrar com seu sistema de email
-                // Por exemplo, Resend, Mailchimp, etc.
-                console.log("Dados do formulário:", data)
+                const response = await fetch("/api/send-ebook", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                })
 
-                // Simular envio (remover em produção)
-                await new Promise((resolve) => setTimeout(resolve, 1000))
+                const result = await response.json()
+
+                if (!response.ok) {
+                  return {
+                    success: false,
+                    error: result.error || "Erro ao enviar e-book. Tente novamente.",
+                  }
+                }
 
                 return { success: true }
               } catch (error) {
-                console.error("Erro ao processar formulário:", error)
+                console.error("Erro ao enviar formulário:", error)
                 return {
                   success: false,
-                  error: "Erro interno. Tente novamente em alguns instantes.",
+                  error: "Erro de conexão. Verifique sua internet e tente novamente.",
                 }
               }
             }}
