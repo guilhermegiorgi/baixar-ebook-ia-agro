@@ -1,6 +1,7 @@
 import { EbookForm } from "@/components/ebook-form"
 import { WaitlistWrapper } from "@/components/box"
 import type { Metadata } from "next"
+import Image from "next/image"
 
 export const dynamic = "force-static"
 
@@ -27,8 +28,21 @@ export default async function Home() {
     <WaitlistWrapper>
       {/* Heading */}
       <div className="space-y-4 text-center">
-        <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-medium mb-4">
-          🤖 Ebook Gratuito
+        <div className="inline-flex items-center justify-center mb-4">
+          <Image
+            src="/GGAILABS_HORIZINTAL_FINAL.svg"
+            alt="GGAILABS"
+            width={120}
+            height={40}
+            className="h-8 w-auto dark:hidden"
+          />
+          <Image
+            src="/GGAILABS_HORIZINTAL_FINAL_BRANCO.svg"
+            alt="GGAILABS"
+            width={120}
+            height={40}
+            className="h-8 w-auto hidden dark:block"
+          />
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-12 text-balance leading-tight">
