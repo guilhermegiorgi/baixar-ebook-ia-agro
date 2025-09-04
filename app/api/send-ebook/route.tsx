@@ -8,70 +8,75 @@ export async function POST(request: NextRequest) {
     const { nome, email, whatsapp } = await request.json()
 
     // Validação básica
-    if (!nome || !email || !whatsapp) {
-      return NextResponse.json({ error: "Todos os campos são obrigatórios" }, { status: 400 })
+    if (!nome || !email) {
+      return NextResponse.json({ error: "Nome e email são obrigatórios" }, { status: 400 })
     }
 
-    // Log dos dados para acompanhamento (já que não temos banco de dados)
-    console.log("[v0] Novo interessado no ebook:", {
+    // Log dos dados para acompanhamento (já que não temos banco)
+    console.log("[EBOOK] Novo interessado:", {
       nome,
       email,
       whatsapp,
       timestamp: new Date().toISOString(),
     })
 
-    // Envio do email com o ebook
+    // Enviar ebook por email
     const { data, error } = await resend.emails.send({
-      from: "Guilherme Giorgi <guilherme@ggailabs.com>", // Substitua pelo seu domínio verificado
+      from: "mailing.ggailabs.com", // Substitua pelo seu domínio verificado
       to: [email],
-      subject: "🚀 Seu E-book: IA no Agronegócio está aqui!",
+      subject: "🤖 Seu E-book: IA no Agronegócio está aqui!",
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #16a34a; text-align: center;">Obrigado pelo seu interesse!</h1>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #16a34a;">Olá, ${nome}!</h2>
           
-          <p>Olá <strong>${nome}</strong>,</p>
+          <p>Obrigado pelo seu interesse em <strong>IA no Agronegócio</strong>!</p>
           
-          <p>É um prazer ter você interessado em conhecer mais sobre a aplicação da Inteligência Artificial no Agronegócio!</p>
+          <p>Conforme prometido, segue em anexo seu e-book gratuito com insights valiosos sobre como a Inteligência Artificial está transformando o setor agrícola.</p>
           
-          <p>Seu e-book está anexado neste email. Nele você encontrará:</p>
+          <div style="background: #f0fdf4; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="color: #16a34a; margin-top: 0;">📚 O que você vai encontrar:</h3>
+            <ul style="color: #374151;">
+              <li>Aplicações práticas dos principais serviços de IA e seu potencial uso no Agro.</li>
+              <li>Tendências e futuro da agricultura digital</li>
+              <li>Ferramentas e tecnologias disponíveis</li>
+            </ul>
+          </div>
           
-          <ul>
-            <li>✅ Principais IAs e suas aplicações na agricultura</li>
-            <li>✅ Tecnologias emergentes e tendências</li>
-            <li>✅ Guia prático para implementação</li>
-          </ul>
+          <p>Esperamos que este material seja útil para sua jornada na agricultura digital!</p>
           
-          <p>Caso tenha alguma dúvida ou queira trocar uma ideia sobre o assunto, fique à vontade para entrar em contato!</p>
-          
-          <p>WhatsApp: ${whatsapp}</p>
-          
-          <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
-          
-          <p style="text-align: center; color: #666; font-size: 14px;">
+          <p style="margin-top: 30px;">
+            Atenciosamente,<br>
             <strong>Guilherme Giorgi</strong><br>
-            Engenheiro Agrônomo, Especialista em Agricultura Digital e IA
+            <em>Engenheiro Agrônomo, Especialista em Agricultura Digital e IA</em>
+          </p>
+          
+          <hr style="margin: 30px 0; border: none; border-top: 1px solid #e5e7eb;">
+          <p style="font-size: 12px; color: #6b7280;">
+            Este e-mail foi enviado porque você se cadastrou para receber nosso material gratuito sobre IA no Agronegócio.
           </p>
         </div>
       `,
       attachments: [
         {
-          filename: "Ebook_IA_no_Agro.pdf",
-          path: "./public/ebook/Ebook_IA_no_Agro.pdf", // Caminho para seu ebook
+          filename: "Ebook-IA-no-Agronegocio.pdf",
+          path: "./public/ebook/Ebook-IA-no-Agronegocio.pdf",
         },
       ],
     })
 
     if (error) {
-      console.error("[v0] Erro no Resend:", error)
-      return NextResponse.json({ error: "Erro ao enviar o ebook. Tente novamente." }, { status: 500 })
+      console.error("[EBOOK] Erro ao enviar email:", error)
+      return NextResponse.json({ error: "Erro ao enviar e-book" }, { status: 500 })
     }
+
+    console.log("[EBOOK] Email enviado com sucesso:", data?.id)
 
     return NextResponse.json({
       success: true,
       message: "E-book enviado com sucesso!",
     })
   } catch (error) {
-    console.error("[v0] Erro na API:", error)
+    console.error("[EBOOK] Erro na API:", error)
     return NextResponse.json({ error: "Erro interno do servidor" }, { status: 500 })
   }
 }
