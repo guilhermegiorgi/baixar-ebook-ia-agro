@@ -113,7 +113,7 @@ export function EbookForm({ formAction, buttonCopy }: EbookForm) {
           placeholder="Seu nome completo"
           value={formData.name}
           className={clsx(
-            "w-full text-sm px-4 py-3 h-12 bg-gray-11/5 rounded-xl text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
+            "w-full text-sm px-4 py-3 h-12 bg-gray-11/5 rounded-md text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
             "focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500/30",
             "transition-all duration-200",
           )}
@@ -127,7 +127,7 @@ export function EbookForm({ formAction, buttonCopy }: EbookForm) {
           placeholder="Seu melhor e-mail"
           value={formData.email}
           className={clsx(
-            "w-full text-sm px-4 py-3 h-12 bg-gray-11/5 rounded-xl text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
+            "w-full text-sm px-4 py-3 h-12 bg-gray-11/5 rounded-md text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
             "focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500/30",
             "transition-all duration-200",
           )}
@@ -141,7 +141,7 @@ export function EbookForm({ formAction, buttonCopy }: EbookForm) {
           placeholder="WhatsApp (com DDD)"
           value={formData.whatsapp}
           className={clsx(
-            "w-full text-sm px-4 py-3 h-12 bg-gray-11/5 rounded-xl text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
+            "w-full text-sm px-4 py-3 h-12 bg-gray-11/5 rounded-md text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
             "focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500/30",
             "transition-all duration-200",
           )}
@@ -155,7 +155,7 @@ export function EbookForm({ formAction, buttonCopy }: EbookForm) {
         type="submit"
         disabled={inputDisabled}
         className={clsx(
-          "w-full h-12 px-6 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-xl",
+          "w-full h-12 px-6 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md",
           "transition-all duration-200 flex items-center justify-center gap-2",
           "disabled:cursor-not-allowed disabled:opacity-70",
           {

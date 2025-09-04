@@ -83,7 +83,7 @@ export function PlaygroundSetupModal({ playgroundInfo, envs }: PlaygroundSetupMo
         ) : (
           <AlertTriangle className="w-4 h-4 text-slate-1" />
         )}
-        <span className={cn("text-base text-slate-1")}>Waitlist Setup</span>
+        <span className={cn("text-base text-slate-1")}>Setup E-book</span>
       </button>
       {/* Modal */}
       <div
@@ -95,7 +95,7 @@ export function PlaygroundSetupModal({ playgroundInfo, envs }: PlaygroundSetupMo
       >
         <div className="flex items-center justify-between flex-shrink-0 px-4 py-3 border-b border-dashed bg-slate-2 border-slate-6 rounded-t-xl">
           <div className="flex items-center gap-2">
-            <span className={cn("text-base font-semibold text-slate-12")}>Waitlist Setup</span>
+            <span className={cn("text-base font-semibold text-slate-12")}>Setup E-book</span>
           </div>
           <a
             href={playgroundInfo.editUrl}

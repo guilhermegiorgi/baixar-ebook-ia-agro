@@ -12,12 +12,12 @@ export const generateMetadata = async (): Promise<Metadata> => {
     openGraph: {
       type: "website",
       title: "Ebook Gratuito: IA no Agronegócio",
-      description: "Descubra como a Inteligência Artificial está revolucionando o agronegócio.",
+      description: "Descubra como a IA está revolucionando o agronegócio.",
     },
     twitter: {
       card: "summary_large_image",
       title: "Ebook Gratuito: IA no Agronegócio",
-      description: "Descubra como a Inteligência Artificial está revolucionando o agronegócio.",
+      description: "Descubra como a IA está revolucionando o agronegócio.",
     },
   }
 }
@@ -65,8 +65,8 @@ export default async function Home() {
 
           <EbookForm
             buttonCopy={{
-              idle: "Baixar Ebook Gratuito",
-              success: "✓ Ebook enviado!",
+              idle: "Baixar E-book Gratuito",
+              success: "✓ E-book enviado!",
               loading: "Enviando...",
             }}
             formAction={async (data) => {
