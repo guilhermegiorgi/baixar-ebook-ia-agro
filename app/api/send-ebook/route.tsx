@@ -7,30 +7,36 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, whatsapp } = await request.json()
+    const { name, email, whatsapp, utm_source, utm_medium, utm_campaign, utm_term, utm_content } = await request.json()
 
     // Validação básica
     if (!name || !email || !whatsapp) {
       return NextResponse.json({ error: "Todos os campos são obrigatórios" }, { status: 400 })
     }
 
-    // Log dos dados para acompanhamento
+    // Log dos dados para acompanhamento (já que não temos banco de dados)
     console.log("[v0] Novo interessado no ebook:", {
       name,
       email,
       whatsapp,
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_term,
+      utm_content,
       timestamp: new Date().toISOString(),
     })
 
-    // Obter parâmetros UTM
-    const utmParams = getUTMParams()
-
-    // Salvar no Supabase
+    // Salvar no Supabase usando os dados UTM que vieram do formulário
     const supabaseResult = await saveInterestedUser({
       name,
       email,
       whatsapp,
-      ...utmParams
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_term,
+      utm_content
     })
 
     if (!supabaseResult.success) {
