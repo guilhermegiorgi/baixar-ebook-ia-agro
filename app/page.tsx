@@ -63,10 +63,10 @@ export default async function Home() {
 
               <div className="
                 [&_form]:space-y-3 sm:[&_form]:space-y-0
-                [&_input]:h-10 sm:[&_input]:h-8 [&_input]:py-2 [&_input]:text-sm
+                [&_input]:h-1 sm:[&_input]:h-8 [&_input]:py-2 [&_input]:text-sm
                 [&_input]:rounded-md [&_input]:border [&_input]:border-gray-300
                 [&_input]:focus:ring-2 [&_input]:focus:ring-blue-500 [&_input]:focus:border-transparent
-                [&_button]:h-11 sm:[&_button]:h-9 [&_button]:text-sm
+                [&_button]:h-1 sm:[&_button]:h-9 [&_button]:text-lg [&_button]:font-medium
                 [&_button]:rounded-md [&_button]:bg-blue-600 [&_button]:text-white
                 [&_button]:hover:bg-blue-700 [&_button]:focus:outline-none [&_button]:focus:ring-2 [&_button]:focus:ring-blue-500
                 [&_button]:disabled:opacity-50 [&_button]:disabled:cursor-not-allowed
