@@ -2,11 +2,18 @@
 import clsx from "clsx"
 import type React from "react"
 import { useRef, useState, useEffect } from "react"
+import { useUTMTracking } from "@/lib/utm-tracking-client"
+import { User, Mail, Phone } from "lucide-react"
 
 type EbookFormData = {
   name: string
   email: string
   whatsapp: string
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_term?: string
+  utm_content?: string
 }
 
 type EbookForm = {
@@ -30,10 +37,12 @@ const STATES: Record<State, State> = {
 export function EbookForm({ formAction, buttonCopy }: EbookForm) {
   const [state, setState] = useState<State>(STATES.idle)
   const [error, setError] = useState<string>()
+  const utmData = useUTMTracking()
   const [formData, setFormData] = useState<EbookFormData>({
     name: "",
     email: "",
     whatsapp: "",
+    ...utmData
   })
   const errorTimeout = useRef<NodeJS.Timeout | null>(null)
 
@@ -105,78 +114,114 @@ export function EbookForm({ formAction, buttonCopy }: EbookForm) {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
+  // Atualizar UTM quando mudar
+  useEffect(() => {
+    setFormData(prev => ({ ...prev, ...utmData }))
+  }, [utmData])
+
   return (
     <form className="flex flex-col gap-4 w-full relative" onSubmit={handleSubmit}>
       <div className="space-y-3">
-        <input
-          type="text"
-          placeholder="Seu nome completo"
-          value={formData.name}
-          className={clsx(
-            "w-full text-sm px-4 py-3 h-12 bg-gray-11/5 rounded-md text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
-            "focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500/30",
-            "transition-all duration-200",
-          )}
-          disabled={inputDisabled}
-          onChange={(e) => handleInputChange("name", e.target.value)}
-          autoComplete="name"
-        />
+        <div className="relative">
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <User className="w-4 h-4" />
+          </div>
+          <input
+            type="text"
+            placeholder="Seu nome completo"
+            value={formData.name}
+            className={clsx(
+              "w-full text-sm pl-10 pr-4 py-3 h-12 bg-gray-11/5 rounded-md text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
+              "focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500/30",
+              "transition-all duration-200",
+            )}
+            disabled={inputDisabled}
+            onChange={(e) => handleInputChange("name", e.target.value)}
+            autoComplete="name"
+          />
+        </div>
 
-        <input
-          type="email"
-          placeholder="Seu melhor e-mail"
-          value={formData.email}
-          className={clsx(
-            "w-full text-sm px-4 py-3 h-12 bg-gray-11/5 rounded-md text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
-            "focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500/30",
-            "transition-all duration-200",
-          )}
-          disabled={inputDisabled}
-          onChange={(e) => handleInputChange("email", e.target.value)}
-          autoComplete="email"
-        />
+        <div className="relative">
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <Mail className="w-4 h-4" />
+          </div>
+          <input
+            type="email"
+            placeholder="Seu melhor e-mail"
+            value={formData.email}
+            className={clsx(
+              "w-full text-sm pl-10 pr-4 py-3 h-12 bg-gray-11/5 rounded-md text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
+              "focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500/30",
+              "transition-all duration-200",
+            )}
+            disabled={inputDisabled}
+            onChange={(e) => handleInputChange("email", e.target.value)}
+            autoComplete="email"
+          />
+        </div>
 
-        <input
-          type="tel"
-          placeholder="WhatsApp (com DDD)"
-          value={formData.whatsapp}
-          className={clsx(
-            "w-full text-sm px-4 py-3 h-12 bg-gray-11/5 rounded-md text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
-            "focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500/30",
-            "transition-all duration-200",
-          )}
-          disabled={inputDisabled}
-          onChange={(e) => handleInputChange("whatsapp", e.target.value)}
-          autoComplete="tel"
-        />
+        <div className="relative">
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <Phone className="w-4 h-4" />
+          </div>
+          <input
+            type="tel"
+            placeholder="WhatsApp (com DDD)"
+            value={formData.whatsapp}
+            className={clsx(
+              "w-full text-sm pl-10 pr-4 py-3 h-12 bg-gray-11/5 rounded-md text-gray-12 placeholder:text-gray-9 border border-gray-11/10",
+              "focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500/30",
+              "transition-all duration-200",
+            )}
+            disabled={inputDisabled}
+            onChange={(e) => handleInputChange("whatsapp", e.target.value)}
+            autoComplete="tel"
+          />
+        </div>
       </div>
 
       <button
         type="submit"
         disabled={inputDisabled}
         className={clsx(
-          "w-full h-12 px-6 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md",
-          "transition-all duration-200 flex items-center justify-center gap-2",
-          "disabled:cursor-not-allowed disabled:opacity-70",
+          "w-full h-12 px-6 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white text-sm font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2",
+          "disabled:cursor-not-allowed disabled:opacity-70 disabled:transform-none disabled:shadow-md",
           {
-            "bg-green-700": state === "loading",
-            "bg-green-600": state === "success",
+            "from-green-700 to-green-800": state === "loading",
+            "from-green-600 to-green-700": state === "success",
           },
         )}
       >
         {state === "loading" ? (
           <>
-            {buttonCopy.loading}
             <Loading />
+            <span className="text-xs">{buttonCopy.loading}</span>
           </>
         ) : isSubmitted ? (
-          buttonCopy.success
+          <>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <span>{buttonCopy.success}</span>
+          </>
         ) : (
-          buttonCopy.idle
+          <>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            <span>{buttonCopy.idle}</span>
+          </>
         )}
       </button>
 
-      {error && <p className="text-xs text-red-500 text-center mt-2 px-2">{error}</p>}
+      {error && (
+        <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg">
+          <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+          </svg>
+          <p className="text-xs text-red-700">{error}</p>
+        </div>
+      )}
     </form>
   )
 }

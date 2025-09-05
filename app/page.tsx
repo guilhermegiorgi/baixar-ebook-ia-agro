@@ -3,7 +3,6 @@ import { WaitlistWrapper } from "@/components/box"
 import { sendEbook } from "@/lib/actions/send-ebook"
 import type { Metadata } from "next"
 import Image from "next/image"
-import { headers } from "next/headers"
 import "server-only"
 
 export const dynamic = "force-static"
@@ -12,93 +11,88 @@ export const generateMetadata = async (): Promise<Metadata> => ({
   title: "Ebook Gratuito: IA no Agronegócio",
   description:
     "Descubra como a Inteligência Artificial está revolucionando o agronegócio. Baixe nosso ebook gratuito e fique por dentro das principais tendências e aplicações práticas.",
-  openGraph: {
-    type: "website",
-    title: "Ebook Gratuito: IA no Agronegócio",
-    description: "Descubra como a IA está revolucionando o agronegócio.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Ebook Gratuito: IA no Agronegócio",
-    description: "Descubra como a IA está revolucionando o agronegócio.",
-  },
+  openGraph: { type: "website", title: "Ebook Gratuito: IA no Agronegócio", description: "Descubra como a IA está revolucionando o agronegócio." },
+  twitter: { card: "summary_large_image", title: "Ebook Gratuito: IA no Agronegócio", description: "Descubra como a IA está revolucionando o agronegócio." },
 })
 
 export default async function Home() {
   return (
-    <WaitlistWrapper className="!py-4">
-      {/* respiro lateral extra para não encostar nas bordas do wrapper */}
-      <div className="w-full px-6 lg:px-10">
-        {/* 1 col → empilha; em lg vira 2 colunas. Nada de corte em md. */}
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(300px,340px)] items-start gap-6 lg:gap-8">
-          {/* Coluna de texto */}
-          <div className="text-center lg:text-left">
-            <div className="inline-flex items-center justify-center lg:justify-start mb-2">
-              <Image
-                src="/GGAILABS_HORIZINTAL_FINAL.svg"
-                alt="GGAILABS"
-                width={120}
-                height={40}
-                className="h-7 w-auto dark:hidden"
-              />
-              <Image
-                src="/GGAILABS_HORIZINTAL_FINAL_BRANCO.svg"
-                alt="GGAILABS"
-                width={120}
-                height={40}
-                className="h-7 w-auto hidden dark:block"
-              />
-            </div>
-
-            <h1 className="text-3xl lg:text-4xl font-bold text-slate-12 leading-tight tracking-tight">
-              Inteligência Artificial no Agronegócio
-            </h1>
-
-            <p className="mt-2 text-base lg:text-lg text-slate-10 leading-snug max-w-xl lg:max-w-none mx-auto lg:mx-0">
-              Descubra como a IA está revolucionando a agricultura moderna e transformando a produtividade no campo.
-            </p>
-
-            <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
-              <div className="flex items-center justify-center lg:justify-start gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500" />
-                <span className="text-slate-11">Casos práticos</span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500" />
-                <span className="text-slate-11">Tecnologias</span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500" />
-                <span className="text-slate-11">Guia de aplicação</span>
-              </div>
-            </div>
+    <WaitlistWrapper className="!py-2">
+      <div className="w-full mx-auto max-w-[940px] px-6 lg:px-11 text-center">
+        {/* HEADER */}
+        <header className="text-center mb-3">
+          <div className="inline-flex items-center justify-center mb-1">
+            <Image src="/GGAILABS_HORIZINTAL_FINAL.svg" alt="GGAILABS" width={140} height={44} className="h-8 w-auto dark:hidden" />
+            <Image src="/GGAILABS_HORIZINTAL_FINAL_BRANCO.svg" alt="GGAILABS" width={140} height={44} className="h-8 w-auto hidden dark:block" />
           </div>
+          <h1 className="text-3xl lg:text-[2.0rem] font-bold text-slate-12 leading-tight tracking-tight text-balance">
+            Inteligência Artificial no Agronegócio
+          </h1>
+        </header>
 
-          {/* Coluna do formulário */}
-          <div className="w-full lg:justify-self-end lg:mr-2">
-            <div className="rounded-2xl border border-gray-11/10 bg-white/5 backdrop-blur-sm p-4 lg:p-5">
-              <h3 className="text-base lg:text-lg font-semibold text-slate-12 mb-1 text-center lg:text-left">
-                Baixe o e-book grátis
+        {/* TEXTO + CHIPS */}
+        <section className="text-pretty max-w-[720px]">
+          <p className="text-base lg:text-sm-2.5 text-slate-11 leading-relaxed">
+            Descubra como a IA pode revolucionar a agricultura moderna e transformar a produtividade no campo.
+          </p>
+          <ul className="mt-4 mx-auto flex flex-wrap items-center justify-center gap-11">
+            <li className="inline-flex h-7 items-center justify-center gap-0 rounded-full border border-white/10 bg-white/5 px-4 text-sm leading-none text-slate-11">
+              <span className="block h-0 w-0 rounded-full bg-green-500" />
+              <span className="whitespace-nowrap">Casos práticos</span>
+            </li>
+
+            <li className="inline-flex h-7 items-center justify-center gap-0 rounded-full border border-white/10 bg-white/5 px-4 text-sm leading-none text-slate-11">
+              <span className="block h-0 w-0 rounded-full bg-green-500" />
+              <span className="whitespace-nowrap">Tecnologias</span>
+            </li>
+
+            <li className="inline-flex h-7 items-center justify-center gap-0 rounded-full border border-white/10 bg-white/5 px-4 text-sm leading-none text-slate-11">
+              <span className="block h-0 w-0 rounded-full bg-green-500" />
+              <span className="whitespace-nowrap">Guia de aplicação</span>
+            </li>
+          </ul>
+
+        </section>
+
+        {/* FORM — centralizado */}
+        <section className="mt-3 lg:mt-6 flex justify-center">
+          <div className="w-full max-w-[400px] mx-auto">
+            <div className="rounded-2xl border border-gray-11/10 bg-white/5 backdrop-blur-sm p-3 shadow-xl">
+              <h3 className="text-base lg:text-lg font-semibold text-slate-12 mb-1.5 text-center">
+                Baixe o E-book Gratuito
               </h3>
-              <p className="text-xs lg:text-sm text-slate-10 mb-3 text-center lg:text-left">
-                Preencha seus dados e receba no seu e-mail.
+              <p className="text-sm text-slate-11 leading-snug mb-3 text-center p-1">
+                Preencha seus dados e receba o material no seu e-mail
               </p>
 
-              <EbookForm
-                buttonCopy={{
-                  idle: "Quero meu e-book",
-                  loading: "Enviando...",
-                  success: "E-book enviado! 🚀",
-                }}
-                formAction={sendEbook}
-              />
+              <div className="
+                [&_form]:space-y-3 sm:[&_form]:space-y-0
+                [&_input]:h-10 sm:[&_input]:h-8 [&_input]:py-2 [&_input]:text-sm
+                [&_input]:rounded-md [&_input]:border [&_input]:border-gray-300
+                [&_input]:focus:ring-2 [&_input]:focus:ring-blue-500 [&_input]:focus:border-transparent
+                [&_button]:h-11 sm:[&_button]:h-9 [&_button]:text-sm
+                [&_button]:rounded-md [&_button]:bg-blue-600 [&_button]:text-white
+                [&_button]:hover:bg-blue-700 [&_button]:focus:outline-none [&_button]:focus:ring-2 [&_button]:focus:ring-blue-500
+                [&_button]:disabled:opacity-50 [&_button]:disabled:cursor-not-allowed
+                [&_svg]:w-4 [&_svg]:h-4
+              ">
+                <EbookForm
+                  buttonCopy={{ idle: 'Baixar E-book Agora', loading: 'Enviando...', success: '✓ E-book enviado!' }}
+                  formAction={sendEbook}
+                />
+              </div>
 
-              <p className="text-[11px] text-slate-9 mt-3 text-center lg:text-left">
-                Seus dados estão seguros. Sem spam.
-              </p>
+              <div className="pt-3 border-t border-gray-11/10">
+                <p className="text-xs text-slate-10 flex items-center justify-center gap-2">
+                  <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  Seus dados estão seguros. Não enviamos spam.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </WaitlistWrapper>
   )
