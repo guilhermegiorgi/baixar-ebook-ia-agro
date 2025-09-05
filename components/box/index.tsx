@@ -13,7 +13,7 @@ export function WaitlistWrapper({ children, className }: PropsWithChildren<{ cla
       )}
     >
       {/* Container central controlado — evita "corte" nas laterais */}
-      <div className="w-full max-w-[1080px] mx-auto px-4 md:px-6 py-6">
+      <div className="w-full max-w-[1080px] mx-auto px-4 md:px-6 py-3">
         <div className="flex flex-col gap-6">{children}</div>
       </div>
 
