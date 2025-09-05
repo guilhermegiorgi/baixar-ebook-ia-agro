@@ -1,5 +1,6 @@
 import { EbookForm } from "@/components/ebook-form"
 import { WaitlistWrapper } from "@/components/box"
+import { sendEbook } from "@/lib/actions/send-ebook"
 import type { Metadata } from "next"
 import Image from "next/image"
 
@@ -83,34 +84,7 @@ export default async function Home() {
               success: "✓ E-book enviado!",
               loading: "Enviando...",
             }}
-            formAction={async (data) => {
-              try {
-                const response = await fetch("/api/send-ebook", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(data),
-                })
-
-                const result = await response.json()
-
-                if (!response.ok) {
-                  return {
-                    success: false,
-                    error: result.error || "Erro ao enviar e-book. Tente novamente.",
-                  }
-                }
-
-                return { success: true }
-              } catch (error) {
-                console.error("Erro ao enviar formulário:", error)
-                return {
-                  success: false,
-                  error: "Erro de conexão. Verifique sua internet e tente novamente.",
-                }
-              }
-            }}
+            formAction={sendEbook}
           />
 
           <p className="text-xs text-slate-9 text-center mt-4">Seus dados estão seguros. Não enviamos spam.</p>

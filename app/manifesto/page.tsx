@@ -50,47 +50,57 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 export default async function Manifesto() {
   return (
-    <WaitlistWrapper>
-      <div className="flex flex-col gap-10">
-        <div className="text-slate-11 [&>p]:tracking-tight [&>p]:leading-[1.6] [&>p:not(:last-child)]:mb-3 text-pretty text-start">
-          <p>
-            A agricultura sempre foi sobre transformação. Transformar sementes em alimentos, terra em produtividade,
-            conhecimento em inovação. Hoje, vivemos um momento único onde a inteligência artificial se torna nossa
-            aliada nessa jornada milenar.
+    <WaitlistWrapper className="max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[80vh]">
+        {/* Conteúdo do manifesto à esquerda */}
+        <div className="text-slate-11 [&>p]:leading-relaxed [&>p:not(:last-child)]:mb-4 text-pretty text-start pr-8">
+          <p className="text-lg">
+            A agricultura sempre foi transformação: sementes viram alimento, solo vira produtividade, conhecimento vira inovação. Hoje, a inteligência artificial acelera esse ciclo, não como promessa distante, mas como ferramenta prática para quem decide o campo todos os dias.
           </p>
 
-          <p>
-            Como Engenheiro Agrônomo, paulistano de origem e mato-grossense de coração, dediquei os últimos 18 anos
-            explorando como a tecnologia pode revolucionar cada etapa do processo produtivo. Das experiências que vão da
-            terra à mesa, construí uma visão pioneira sobre o potencial transformador da IA na agricultura.
+          <p className="text-lg">
+            Sou Engenheiro Agrônomo, paulistano de origem, mato-grossense de coração. Há 18 anos conecto tecnologia ao agro, do talhão ao sistema. Essa vivência me mostrou, na prática, como dados bem coletados e algoritmos bem aplicados mudam resultado de safra, custo e decisão.
           </p>
 
-          <p>
-            Acredito que o agronegócio não é apenas tradição - é terreno fértil para inovação e impacto global. Cada
-            dado coletado, cada algoritmo aplicado, cada solução implementada nos aproxima de uma agricultura mais
-            eficiente, sustentável e inteligente.
+          <p className="text-lg">
+            O agronegócio é tradição, sim, mas é também o maior laboratório de inovação do mundo real. Cada sensor instalado, cada linha de código e cada análise feita nos aproxima de uma agricultura mais eficiente, sustentável e inteligente.
           </p>
 
-          <p>
-            Este e-book representa mais que conhecimento técnico. É um convite para enxergar o futuro que já começou,
-            onde inteligência artificial e agricultura se unem para alimentar o mundo de forma mais inteligente. Juntos,
-            podemos semear o amanhã que queremos colher.
+          <p className="text-lg">
+            Este e-book não é só conteúdo técnico. É um convite para enxergar e aplicar o que já está disponível: IA integrada à rotina, do planejamento ao pós-colheita, em soluções simples, úteis e mensuráveis.
           </p>
 
-          <p>
-            A revolução digital no campo não é uma possibilidade distante - é uma realidade que está transformando
-            fazendas ao redor do mundo. E você pode fazer parte dessa transformação.
+          <p className="text-lg">
+            A revolução digital no campo já está em curso e não espera calendário agrícola. Quem se move agora lidera o próximo ciclo.
+            <br />
+            <strong className="text-slate-12 text-xl">Está pronto para ser protagonista dessa transformação?</strong>
           </p>
-        </div>
-        <div className="flex flex-col gap-10">
-          <div className="flex flex-col gap-0.5 items-start">
-            <p className={clsx("text-slate-12 text-4xl font-medium italic transform -rotate-12", font.className)}>
+
+          {/* Assinatura */}
+          <div className="mt-8 flex flex-col gap-0.5 items-start">
+            <p className={clsx("text-slate-12 text-4xl font-medium italic transform -rotate-3", font.className)}>
               Guilherme Giorgi
             </p>
             <p className="text-slate-11 text-sm font-medium">
               Engenheiro Agrônomo{" "}
               <span className="text-slate-10 text-xs">Especialista em Agricultura Digital e IA</span>
             </p>
+          </div>
+        </div>
+
+        {/* Imagem do Guilherme à direita */}
+        <div className="flex justify-center lg:justify-end">
+          <div className="relative">
+            <img
+              src="/guilherme.png"
+              alt="Guilherme Giorgi no campo"
+              className="w-full max-w-xl h-auto rounded-2xl shadow-2xl border-4 border-white/10"
+              style={{
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+              }}
+            />
+            {/* Decorativo overlay */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-green-400/20 to-blue-500/20 rounded-2xl blur-xl -z-10"></div>
           </div>
         </div>
       </div>
