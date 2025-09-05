@@ -21,11 +21,7 @@ export default async function Home() {
       <div className="w-full mx-auto max-w-[940px] px-6 lg:px-11 text-center">
         {/* HEADER */}
         <header className="text-center mb-3">
-          <div className="inline-flex items-center justify-center mb-1">
-            <Image src="/GGAILABS_HORIZINTAL_FINAL.svg" alt="GGAILABS" width={140} height={44} className="h-8 w-auto dark:hidden" />
-            <Image src="/GGAILABS_HORIZINTAL_FINAL_BRANCO.svg" alt="GGAILABS" width={140} height={44} className="h-8 w-auto hidden dark:block" />
-          </div>
-          <h1 className="text-3xl lg:text-[2.0rem] font-bold text-slate-12 leading-tight tracking-tight text-balance">
+          <h1 className="text-3xl lg:text-[2.5rem] font-bold text-slate-12 leading-tight tracking-tight text-balance">
             Inteligência Artificial no Agronegócio
           </h1>
         </header>
