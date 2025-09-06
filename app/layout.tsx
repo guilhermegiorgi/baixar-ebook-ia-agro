@@ -4,8 +4,12 @@ import type { Viewport } from "next"
 import { Geist } from "next/font/google"
 import { Providers } from "@/context"
 import { Header } from "@/components/header"
-import { Toolbar } from "basehub/next-toolbar"
 import { basehub } from "basehub"
+
+// Importar Toolbar apenas em desenvolvimento
+const Toolbar = process.env.NODE_ENV === 'development' 
+  ? require("basehub/next-toolbar").Toolbar 
+  : () => null
 import { MeshGradientComponent } from "@/components/mesh-gradient"
 import { PlaygroundSetupModal } from "@/components/playground-notification"
 import "./globals.css"
@@ -124,7 +128,10 @@ export default async function RootLayout({
             </div>
           </div>
         </Providers>
-        {!isMainV0 && <Toolbar />}
+        {/* Apenas mostrar Toolbar em desenvolvimento com BaseHub configurado */}
+        {process.env.NODE_ENV === 'development' && process.env.BASEHUB_TOKEN && !isMainV0 && (
+          <Toolbar />
+        )}
         {playgroundNotification}
       </body>
     </html>
